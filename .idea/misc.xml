@@ -6,6 +6,24 @@
   <component name="ProjectType">
     <option name="id" value="Android" />
   </component>
+  <component name="SvnBranchConfigurationManager">
+    <option name="myConfigurationMap">
+      <map>
+        <entry key="$PROJECT_DIR$">
+          <value>
+            <SvnBranchConfiguration>
+              <option name="branchUrls">
+                <list>
+                  <option value="https://github.com/FNX-hub/KingBlurtooth.git/branches" />
+                </list>
+              </option>
+              <option name="trunkUrl" value="https://github.com/FNX-hub/KingBlurtooth.git/trunk" />
+            </SvnBranchConfiguration>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="masterDetails">
     <states>
       <state key="ProjectJDKs.UI">

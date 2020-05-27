@@ -26,4 +26,5 @@
     <string name="ToastTextBluetoothErr">Bluetooth Error</string>
     <string name="ToastTextBluetoothAlreadyOn">Bluetooth is already On</string>
     <string name="ToastTextDiscoverabilityOn">You are visible</string>
+    <string name="ToastTextDiscoverabilityOff">You are not visible</string>
 </resources>

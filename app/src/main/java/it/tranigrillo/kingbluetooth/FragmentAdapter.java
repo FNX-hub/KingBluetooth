@@ -15,8 +15,8 @@ public class FragmentAdapter extends FragmentPagerAdapter {
 
     private List<Fragment> fragments;
 
-    FragmentAdapter(FragmentManager fm, Context context, List<Fragment> fragments) {
-        super(fm);
+    FragmentAdapter(FragmentManager fragmentManager, /*Context context,*/ List<Fragment> fragments) {
+        super(fragmentManager);
         this.fragments = fragments;
     }
 

@@ -19,26 +19,32 @@ classe MainActivity
 l'older pensa a generare il layout con il metodo tabInflate
 i singolo comportamenti sono rimandati ai singoli fragment
 */
-
 public class MainActivity extends AppCompatActivity {
 
+
+    public static final String DEBUG = "Debug";
+
     private class Holder {
+        BluetoothManager btManager;
+
         ViewPager viewPager;
         TabLayout tabLayout;
         ArrayList<Fragment> fragments;
 
+
         Holder(Context context) {
+            this.btManager = new BluetoothManager();
             this.tabLayout = findViewById(R.id.tabLayout);
             this.viewPager = findViewById(R.id.viewPager);
 
             fragments = new ArrayList<>();
-            fragments.add(new OptionFragment(context));
+            fragments.add(new OptionFragment(context, btManager));
             fragments.add(new DeviceFragment(context));
 
         }
 
         void tabInflate() {
-            final FragmentAdapter adapter = new FragmentAdapter(getSupportFragmentManager(), getApplicationContext(), fragments);
+            final FragmentAdapter adapter = new FragmentAdapter(getSupportFragmentManager(), /*getApplicationContext(),*/ fragments);
             viewPager.setAdapter(adapter);
             tabLayout.setupWithViewPager(viewPager);
             Objects.requireNonNull(tabLayout.getTabAt(0)).setText(getResources().getString(R.string.option));

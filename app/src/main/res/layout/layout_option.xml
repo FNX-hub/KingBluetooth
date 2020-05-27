@@ -78,10 +78,10 @@
                             android:textColor="@color/primaryLightColor" />
 
                         <TextView
-                            android:id="@+id/tvtimerDynamuc"
+                            android:id="@+id/timeDynamic"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0:00"
+                            android:text="00:00"
                             android:textColor="@color/primaryLightColor" />
 
                     </LinearLayout>

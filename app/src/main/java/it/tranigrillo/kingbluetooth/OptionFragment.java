@@ -21,14 +21,16 @@ import java.util.ArrayList;
 // aggiunge il clickLister per gli switch
 //
 
-
 public class OptionFragment extends Fragment {
 
+    private final BluetoothManager btManager;
     private Context context;
 //    private ArrayList<Device> device;
 
-    OptionFragment(Context context) {
+    OptionFragment(Context context, BluetoothManager btManager) {
+
         this.context = context;
+        this.btManager = btManager;
     }
 
     @Override
@@ -42,10 +44,14 @@ public class OptionFragment extends Fragment {
 
 //      crea un listner e assegnagli gli switch
         Switch onoff = root.findViewById(R.id.swtBtOnOff);
-        Switch vis = root.findViewById(R.id.swtBtVisible);
-        SwitchClickListener listener = new SwitchClickListener(context, root);
+        Switch visibility = root.findViewById(R.id.swtBtVisible);
+        SwitchClickListener listener = new SwitchClickListener(context, root, btManager);
         onoff.setOnCheckedChangeListener(listener);
-        vis.setOnCheckedChangeListener(listener);
+        visibility.setOnCheckedChangeListener(listener);
+        if(btManager.isEnabled()) onoff.setChecked(true);
+
+//                                                /\
+//================================================||    codice ottimizzato
 
 //      procedura per l'inflate della recycle view
         RecyclerView recyclerView = root.findViewById(R.id.rvDevices);
