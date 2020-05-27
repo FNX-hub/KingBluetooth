@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name" translatable="false">King Bluetooth</string>
+    <string name="history">Received file</string>
+    <string name="about" translatable="false">About Us</string>
+    <string name="option">Option</string>
+    <string name="on" translatable="false">On</string>
+    <string name="off" translatable="false">Off</string>
+    <string name="not_visible">Not Visible</string>
+    <string name="visible" translatable="false">Visible</string>
+    <string name="visibility_time_t">"Visibility time   "</string>
+    <string name="pairing">Pair new device</string>
+    <string name="history_devices">Previously connected devices</string>
+    <string name="search_device">Available devices</string>
+    <string name="no_previous_device">No previous device</string>
+    <string name="device_name" translatable="false">DEVICE NAME</string>
+    <string name="statusActive">Active</string>
+    <string name="statusConnecting">Connecting…</string>
+    <string name="info">Turn on Bluetooth to connect to other devices</string>
+    <string name="device">Connected device</string>
+    <string name="available_devices">Multimedia devices connected</string>
+    <string name="statusConnected">Connected</string>
+    <string name="Null" translatable="false">Null</string>
+    <string name="ToastTextNoBluetooth">Bluetooth not supported</string>
+    <string name="ToastTextBluetoothOn">Bluetooth On</string>
+    <string name="ToastTextBluetoothOff">Bluetooth Off</string>
+    <string name="ToastTextBluetoothErr">Bluetooth Error</string>
+    <string name="ToastTextBluetoothAlreadyOn">Bluetooth is already On</string>
+    <string name="ToastTextDiscoverabilityOn">You are visible</string>
+</resources>

@@ -1,0 +1,23 @@
+
+z
+Japp/src/main/java/it/tranigrillo/bluetoothproject/RecycleViewInflater.java,1\3\13adc7938f8ae6c2557caf30d5c07a6f9c8db723
+v
+Fapp/src/main/java/it/tranigrillo/bluetoothproject/PairingListener.java,7\d\7d4a863162aca320cdb708f09eb912213656f46d
+u
+Eapp/src/main/java/it/tranigrillo/bluetoothproject/OptionFragment.java,0\c\0c125fd6408ab5deb090102e7716d7c65e896a82
+s
+Capp/src/main/java/it/tranigrillo/bluetoothproject/MainActivity.java,d\c\dcbebde8bbc239ed6de2ed396849934f7bbca580
+u
+Eapp/src/main/java/it/tranigrillo/bluetoothproject/DeviceFragment.java,e\3\e3cc1adef475819576ac1a522ff8db6f5d40c399
+v
+Fapp/src/main/java/it/tranigrillo/bluetoothproject/FragmentAdapter.java,1\a\1a30d0293543519e8fe212e46764928b9f09c97f
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
+t
+Dapp/src/main/java/it/tranigrillo/bluetoothproject/CustomAdapter.java,f\9\f981345f23f22dfe88a2ed826fa657f6f743dab7
+m
+=app/src/main/java/it/tranigrillo/bluetoothproject/Device.java,e\8\e86468389d76b724c4380ab645d7f39c399453c4
+w
+Gapp/src/main/java/it/tranigrillo/bluetoothproject/BluetoothManager.java,9\6\9698f94597fb01fab63218aaf416a76b2730b474
+z
+Japp/src/main/java/it/tranigrillo/bluetoothproject/SwitchClickListener.java,1\3\13ccf72528714e2fb699e84919b0ec751031b5d1
