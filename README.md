@@ -1,2 +1,0 @@
-# KingBluetooth
-Bluetooth Application Manager
