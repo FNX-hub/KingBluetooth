@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         ViewPager viewPager;
         TabLayout tabLayout;
 
-        Holder(Context context, boolean value) {
+        Holder(Context context) {
             this.bluetooth = new BluetoothManager(context);
             this.tabLayout = findViewById(R.id.tabLayout);
             this.viewPager = findViewById(R.id.viewPager);
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
         }
         else {
-            this.holder = new Holder(this, true);
+            this.holder = new Holder(this);
             holder.tabInflater();
         }
     }
@@ -81,144 +81,13 @@ public class MainActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //action if granted
-                    this.holder = new Holder(this, true);
+                    this.holder = new Holder(this);
                     holder.tabInflater();
                 }
                 else {
                     //action if not granted
-                    this.holder = new Holder(this, false);
+                    this.holder = new Holder(this);
                     holder.tabInflater();
                 }
     }
-
-
-    //    public class Bluetooth {
-//        Context context;
-//        BluetoothAdapter adapter;
-//        Method setDiscoverability;
-//
-//        Bluetooth(Context context){
-//         this.context = context;
-//         this.adapter = BluetoothAdapter.getDefaultAdapter();
-//         try {
-//             this.setDiscoverability = BluetoothAdapter.class.getMethod("setScanMode", int.class);
-//         } catch (NoSuchMethodException | IllegalArgumentException e) {
-//             Log.e(ERROR, ">>>> FAILED TO GET METHOD");
-//         }
-//        }
-//
-//        Boolean isEnabled(){
-//            Boolean value = adapter.isEnabled();
-//            Log.d(BLUETOOTH, BLUETOOTH_ENABLED + value );
-//            return value;
-//        }
-//
-//        Boolean isSupported(){
-//            if (this.adapter == null) {
-//                Log.d(BLUETOOTH, ">>>>> BLUETOOTH NOT SUPPORTED");
-//                return false;
-//            }
-//            Log.d(BLUETOOTH, ">>>>> BLUETOOTH SUPPORTED");
-//            return true;
-//        }
-//
-//        Integer enableBluetooth() {
-//            if (!adapter.isEnabled()) {
-//                adapter.enable();
-//                try {
-//                    setDiscoverability.invoke(adapter, BluetoothAdapter.SCAN_MODE_CONNECTABLE);
-//                    Log.d(BLUETOOTH, ">>>>> BLUETOOTH ENABLED, VISIBILITY OFF");
-//                    return 0;
-//                } catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
-//                    Log.e(ERROR, ">>>>> Failed to turn off bluetooth device discoverability", e);
-//                    return -1;
-//                }
-//            }
-//            Log.d(BLUETOOTH, BLUETOOTH_ENABLED);
-//            return 1;
-//        }
-//
-//        Integer disableBluetooth() {
-//            if (adapter.isEnabled()) {
-//                adapter.disable();
-//                Log.d(BLUETOOTH, BLUETOOTH_NOT_ENABLED);
-//                return 0;
-//            }
-//            Log.d(BLUETOOTH, BLUETOOTH_NOT_ENABLED);
-//            return 1;
-//        }
-//
-//        void enableDiscoverability() {
-//            try {
-//                setDiscoverability.invoke(adapter, BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE);
-//                Log.d(BLUETOOTH, ">>>>> DISCOVERABILITY ENABLED");
-//            } catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
-//                Log.e(ERROR, "Failed to turn on bluetooth device discoverability.", e);
-//            }
-//        }
-//
-//        void disableDiscoverability() {
-//            try {
-//                setDiscoverability.invoke(adapter, BluetoothAdapter.SCAN_MODE_CONNECTABLE);
-//                Log.d(DEBUG, ">>>>> DISCOVERABILITY ENABLED");
-//            } catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
-//                Log.e(ERROR, "Failed to turn off bluetooth device discoverability.", e);
-//            }
-//        }
-//
-//        ArrayList<Object[]> getBoundedDevices( ArrayList<Object[]> deviceArrayList) {
-//            Set<BluetoothDevice> boundedDevicesSet = adapter.getBondedDevices();
-//            if (boundedDevicesSet.size() > 0) {
-//                for (BluetoothDevice element : boundedDevicesSet) {
-//                    String name = element.getName();
-//                    String address = element.getAddress();
-//                    int state = element.getBondState();
-//                    int type = element.getType();
-//                    Object[] device = new Object[]{name, address, state, type};
-//                    deviceArrayList.add(device);
-//                    Log.d(BLUETOOTH, "Device name: " + name);
-//                    Log.d(BLUETOOTH, "Device address: " + address);
-//                    Log.d(BLUETOOTH, "Device state: " + state);
-//                    Log.d(BLUETOOTH, "Device type: " + type);
-//                }
-//            }
-//            return deviceArrayList;
-//        }
-//
-//        ArrayList<Object[]> startScan(final ArrayList<Object[]> deviceArrayList) {
-//            if (adapter.isDiscovering()) adapter.cancelDiscovery();
-//            IntentFilter filter = new IntentFilter();
-//            filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
-//            filter.addAction(BluetoothDevice.ACTION_FOUND);
-//            filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
-//            BroadcastReceiver receiver = new BroadcastReceiver() {
-//                @Override
-//                public void onReceive(Context context, Intent intent) {
-//                    String action = intent.getAction();
-//                    Log.d(BLUETOOTH, ">>>> Broadcast reciver action: " + action);
-//                    if (action.equals(BluetoothDevice.ACTION_FOUND)) {
-//                        BluetoothDevice element = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-//                        assert element != null;
-//                        String name = element.getName();
-//                        String address = element.getAddress();
-//                        int state = element.getBondState();
-//                        int type = element.getType();
-//                        Object[] device = new Object[]{name, address, state, type};
-//                        deviceArrayList.add(device);
-//                        Log.d(BLUETOOTH, "Device name: " + name);
-//                        Log.d(BLUETOOTH, "Device address: " + address);
-//                        Log.d(BLUETOOTH, "Device state: " + state);
-//                        Log.d(BLUETOOTH, "Device type: " + type);
-//                    }
-//                }
-//            };
-//            registerReceiver(receiver, filter);
-//            adapter.startDiscovery();
-//            return deviceArrayList;
-//        }
-//
-//    }
-
-
-
 }

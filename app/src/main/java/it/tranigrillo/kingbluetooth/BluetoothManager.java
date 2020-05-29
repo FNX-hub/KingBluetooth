@@ -23,7 +23,7 @@ class BluetoothManager {
 
     private Context context;
     BluetoothAdapter adapter;
-    private boolean discovering = false;
+    private boolean isDiscovering = false;
 
     BluetoothManager(Context context){
         this.context = context;
@@ -87,12 +87,13 @@ class BluetoothManager {
     }
 
     boolean isDiscovering(){
-        return discovering;
+        return isDiscovering;
     }
 
     void getBoundedDevices(List<Device> deviceArrayList, CustomAdapter viewAdapter) {
-        deviceArrayList.clear();
-        viewAdapter.removeAll();
+
+        deviceArrayList.clear();     //Ripulisci buffer
+        viewAdapter.removeAll();    //
         Set<BluetoothDevice> boundedDevicesSet = adapter.getBondedDevices();
         if (boundedDevicesSet.size() > 0) {
             for (BluetoothDevice element : boundedDevicesSet) {
@@ -112,11 +113,11 @@ class BluetoothManager {
     }
 
     Receiver startScanAvailableDevice(List<Device> deviceArrayList, CustomAdapter viewAdapter) {
-        deviceArrayList.clear();
-        viewAdapter.removeAll();
-        if (discovering) {
+        deviceArrayList.clear();    //Ripulisci buffer
+        viewAdapter.removeAll();   //
+        if (isDiscovering) {
             adapter.cancelDiscovery();
-            discovering = false;
+            isDiscovering = false;
             deviceArrayList.clear();
             viewAdapter.removeAll();
         }
@@ -127,7 +128,7 @@ class BluetoothManager {
         Receiver receiver = new Receiver(deviceArrayList, viewAdapter);
         context.registerReceiver(receiver, filter);
         adapter.startDiscovery();
-        discovering = true;
+        isDiscovering = true;
         Log.d(BLUETOOTH, "scan: " + deviceArrayList.size());
         return receiver;
     }
@@ -176,19 +177,24 @@ class BluetoothManager {
             String action = intent.getAction();
             Log.d(BLUETOOTH, ">>>> Broadcast reciver action: " + action);
             if (action.equals(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)) {
-                discovering = false;
-                Log.d(BLUETOOTH, ">>>> discovering: " + discovering);
+                isDiscovering = false;
+                Log.d(BLUETOOTH, ">>>> discovering: " + isDiscovering);
             }
             if (action.equals(BluetoothDevice.ACTION_FOUND)) {
                 BluetoothDevice element = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+
+//              ottieni il nome del dispositivo: se nullo ---> assegna "No name"
                 String name;
                 if (element.getName() == null) {
                     name = "No name";
                 } else {
                     name = element.getName();
                 }
+//                get MAC
                 String address = element.getAddress();
+//                get status
                 int state = element.getBondState();
+//                get type
                 int type = element.getType();
                 Object[] data = new Object[]{name, address, state, type};
                 Device device = new Device(data);

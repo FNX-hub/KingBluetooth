@@ -103,7 +103,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
     static class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView tvDeviceName;
-        private TextView tvNoDevice;
         private TextView tvStatus;
         private ImageView ivOption;
         private CardView cvDeviceName;

@@ -85,14 +85,14 @@ public class OptionFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         TextView tvButton = root.findViewById(R.id.tvAdd);
-        TextView scan = root.findViewById(R.id.tvScan);
+        TextView tvScan = root.findViewById(R.id.tvScan);
         final ProgressBar progressBar = root.findViewById(R.id.progressBar);
         if (tvButton.getText() == context.getResources().getString(R.string.pairing)){
             tvButton.setText(context.getResources().getString(R.string.history_devices));
             Drawable icon = context.getResources().getDrawable(R.drawable.ic_devices_other, context.getTheme());
             icon.setBounds(0, 0, icon.getIntrinsicWidth(), icon.getIntrinsicHeight());
             tvButton.setCompoundDrawables( icon, null, null, null);
-            scan.setText(context.getResources().getString(R.string.search_device));
+            tvScan.setText(context.getResources().getString(R.string.search_device));
             progressBar.setVisibility(View.VISIBLE);
             adapter = new CustomAdapter(context, deviceAvailableArrayList, bluetooth);
             recyclerView.setAdapter(adapter);
@@ -105,22 +105,24 @@ public class OptionFragment extends Fragment implements View.OnClickListener {
                     }
                     Log.d("bluetooth",""+bluetooth.isDiscovering() );
                 }
-
                 @Override
                 public void onFinish() {
                     progressBar.setVisibility(View.INVISIBLE);
+//                    bluetooth.stopScanAvailableDevice(receiver);
                 }
             }.start();
         }
 
-        else{
+        else{// (tvButton.getText() != context.getResources().getString(R.string.pairing) && bluetooth.isEnabled()) {
             tvButton.setText(context.getResources().getString(R.string.pairing));
             Drawable icon = context.getResources().getDrawable(R.drawable.ic_add, context.getTheme());
             icon.setBounds(0, 0, icon.getIntrinsicWidth(), icon.getIntrinsicHeight());
             tvButton.setCompoundDrawables( icon, null, null, null);
-            scan.setText(context.getResources().getString(R.string.history_devices));
+            tvScan.setText(context.getResources().getString(R.string.history_devices));
             progressBar.setVisibility(View.INVISIBLE);
-            bluetooth.stopScanAvailableDevice(receiver);
+//            if (bluetooth.isDiscovering()){
+//                bluetooth.stopScanAvailableDevice(receiver);
+//            }
             bluetooth.getBoundedDevices(deviceBoundedArrayList, adapter);
         }
     }
