@@ -10,8 +10,6 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Locale;
-
 public class SwitchClickListener implements Switch.OnCheckedChangeListener {
 
     private static final String DEBUG = "Debug";

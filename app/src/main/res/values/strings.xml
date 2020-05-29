@@ -11,7 +11,7 @@
     <string name="pairing">Pair new device</string>
     <string name="history_devices">Previously connected devices</string>
     <string name="search_device">Available devices</string>
-    <string name="no_previous_device">No previous device</string>
+    <string name="no_device">No device</string>
     <string name="device_name" translatable="false">DEVICE NAME</string>
     <string name="statusActive">Active</string>
     <string name="statusConnecting">Connecting…</string>

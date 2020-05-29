@@ -6,16 +6,17 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import java.util.List;
 
 //adapter che permette di creare liste di fragment generici
 
-public class FragmentAdapter extends FragmentPagerAdapter {
+public class FragmentAdapter extends FragmentStatePagerAdapter {
 
     private List<Fragment> fragments;
 
-    FragmentAdapter(FragmentManager fragmentManager, /*Context context,*/ List<Fragment> fragments) {
+    FragmentAdapter(FragmentManager fragmentManager, List<Fragment> fragments) {
         super(fragmentManager);
         this.fragments = fragments;
     }

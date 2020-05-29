@@ -1,6 +1,8 @@
 package it.tranigrillo.kingbluetooth;
 
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,30 +19,51 @@ import java.util.List;
 // richiede una lista di device
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
+    private final BluetoothManager bluetooth;
+    private final Context context;
     private List<Device> deviceList;
 
-    CustomAdapter(List<Device> deviceList) {
+    CustomAdapter(Context context, List<Device> deviceList, BluetoothManager bluetooth) {
+        this.context = context;
         this.deviceList = deviceList;
+        this.bluetooth = bluetooth;
     }
 
     @NonNull
     @Override
-    public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)  {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
         View deviceView = inflater.inflate(R.layout.cardview_device, parent, false);
-        return new CustomViewHolder(deviceView, this, deviceList);
+        Log.d("Debug", "inflate previous");
+        return new CustomViewHolder(deviceView, this/*, bluetooth, deviceList*/);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
+
         Device device = deviceList.get(position);
-        holder.tvDeviceName.setText(device.getDeviceName());
-        holder.tvStatus.setText(device.getStatus());
-        if (device.getStatus().equals(holder.tvStatus.getResources().getString(R.string.statusConnected))) {
+        holder.tvDeviceName.setText(device.getName());
+        holder.tvStatus.setText(String.format("MAC: %s\nStatus: %s", device.getAddress(),context.getResources().getString(R.string.statusActive)));
+        switch (device.getState()) {
+            case BluetoothDevice.BOND_NONE: {
+                holder.tvStatus.setText(String.format("MAC: %s\nStatus: %s", device.getAddress(),context.getResources().getString(R.string.statusActive)));
+                break;
+            }
+            case BluetoothDevice.BOND_BONDING: {
+                holder.tvStatus.setText(String.format("MAC: %s\nStatus: %s", device.getAddress(),context.getResources().getString(R.string.statusConnecting)));
+                break;
+            }
+            case BluetoothDevice.BOND_BONDED: {
+                holder.tvStatus.setText(String.format("MAC: %s\nStatus: %s", device.getAddress(),context.getResources().getString(R.string.statusConnected)));
+                break;
+            }
+        }
+        if (device.getAddress().equals(holder.tvStatus.getResources().getString(R.string.statusConnected))) {
             holder.ivOption.setImageResource(R.drawable.ic_bluetooth_disabled);
         }
+        Log.d("Debug", "onBind previous");
     }
 
     @Override
@@ -50,43 +73,71 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
     public void removeItem(int position) {
         deviceList.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public Device getItem(int position) {
+        return deviceList.get(position);
+    }
+
+    public void addItem(Device device) {
+        if (!deviceList.contains(device)) {
+            deviceList.add(device);
+            notifyDataSetChanged();
+        }
+    }
+
+    public void removeAll(){
+        for (int i = getItemCount(); i > 0; i--){
+            removeItem(i-1);
+            notifyItemRemoved(i-1);
+        }
+    }
+
+    public void addAll(List<Device> deviceList){
+        for (int i = 0; i <deviceList.size(); i++){
+            addItem(deviceList.get(i));
+            notifyDataSetChanged();
+        }
     }
 
     static class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView tvDeviceName;
+        private TextView tvNoDevice;
         private TextView tvStatus;
         private ImageView ivOption;
-        private List<Device> deviceList;
-        private CardView cvName;
-        private CardView cvOption;
-        CustomAdapter adapter;
+        private CardView cvDeviceName;
+        private CardView cvDeviceOption;
+        private CustomAdapter adapter;
 
-        CustomViewHolder(@NonNull View itemView, CustomAdapter adapter, List<Device> deviceList) {
+        CustomViewHolder(@NonNull View itemView, CustomAdapter adapter/*, BluetoothManager bluetooth, List<Device> deviceList*/) {
             super(itemView);
             this.adapter = adapter;
+
             this.tvDeviceName = itemView.findViewById(R.id.tvAdd);
             this.tvStatus = itemView.findViewById(R.id.tvStatus);
             this.ivOption = itemView.findViewById(R.id.ivOption);
-            this.deviceList = deviceList;
-            this.cvName = itemView.findViewById(R.id.cvDevice);
-            this.cvOption = itemView.findViewById(R.id.cvOption);
-            cvName.setOnClickListener(this);
-            cvOption.setOnClickListener(this);
+            this.cvDeviceName = itemView.findViewById(R.id.cvDevice);
+            this.cvDeviceOption = itemView.findViewById(R.id.cvOption);
+            cvDeviceName.setOnClickListener(this);
+            cvDeviceOption.setOnClickListener(this);
+            Log.d("Debug", "CustomViewHolder previous");
+
         }
 
         @Override
         public void onClick(View v) {
-            if (v.getId() == cvName.getId()) {
-                if (deviceList.get(getAdapterPosition()).getStatus().equals(v.getResources().getString(R.string.statusActive))) {
-                    tvStatus.setText(R.string.statusConnecting);
+            Device device = adapter.getItem(getAdapterPosition());
+            if (v.getId() == cvDeviceName.getId() && device.getState().equals(BluetoothDevice.BOND_NONE)) {
+                adapter.bluetooth.boundDevice(device.getAddress());
+                while (device.getState().equals(BluetoothDevice.BOND_BONDING)) {
+                    tvStatus.setText("Pairing...");
                 }
-                if (deviceList.get(getAdapterPosition()).getStatus().equals(v.getResources().getString(R.string.statusConnected))) {
-                    tvStatus.setText("Invio file...");
-                }
-            }
-            else {
                 adapter.removeItem(getAdapterPosition());
-                adapter.notifyItemRemoved(getAdapterPosition());
+            }
+            if (v.getId() == cvDeviceOption.getId() && device.getState().equals(BluetoothDevice.BOND_BONDED)) {
+                adapter.bluetooth.unBoundDevice(device.getAddress());
+                adapter.removeItem(getAdapterPosition());
             }
         }
     }
