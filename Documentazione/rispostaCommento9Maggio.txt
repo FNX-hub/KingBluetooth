@@ -1,0 +1,32 @@
+le modifiche dette in precedenza volevo farle ua volta fatto del codice, visto che erano molto collegate tra loro
+
+12) La definizione di profilo bluetooth è quella del developer e penso che corrispoda a quella che hai detto tu, oterei per la A, almeno i primi due profili (handset e a2dp) dovrebbero essere testabili
+
+25) La si potrebbe migliorare sostituendola con del codice commentato
+
+26) bisogna vedere che cosa intende per risorse (probabilmete consumo batteria)
+
+28) associati penso sia un problema di traduzione e dovrebbe essere sinonimo di accoppiato
+
+31) concordo sul semplificare la definizione, penso sia full duplex sinceramente ma devo approfondire
+
+aggiungo l'elenco dei cambiamenti che abbiamo concordato in precedenza
+(il numero associato fa riferimento a quello su whatsapp ) 
+======================================================
+
+1) creare indice ==> fatto
+
+2) chiarificare pairing ==> aggiungere codice?
+
+3) chiarire i termini inserendo note ==> vedere come inserire le note
+	Api level
+	beacon bluetooth
+	power manager
+	[aggingi alri se ne trovi]
+
+4) cosa succede se si risponde di no all'interfaccia di dialogo ==> verificare in app
+
+5) ciarire cosa si intende per risorse nella discovery ==> verificare in app
+
+7) stile delle icone ==> (lo vedrei per ultima cosa confrontando con il resto del lavoro)
+
