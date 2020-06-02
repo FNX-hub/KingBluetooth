@@ -1,7 +1,0 @@
-<application>
-  <component name="GithubAccounts">
-    <account id="cfc0f78f-04a6-4a12-8fe9-02b49c8ce878" name="FNX-hub">
-      <server host="github.com" />
-    </account>
-  </component>
-</application>
