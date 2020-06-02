@@ -1,0 +1,79 @@
+SCALETTA DI RIEPILOGO versione 1.0
+
+Quali argomenti dovranno essere trattati, in che ordine e da quali fonti prendere
+NB la prima slide (dopo la "copertina") in assoluto vorrei che fosse un indice cliccabile dei paragrafi,
+quindi cerchiamo di ragionare su come dividere in paragrafi il materiale grezzo che abbiamo a disposizione.
+ovviamente ogni paragrafo sarà composto da un certo numero di slide (suppongo che il numero minimo per essere definito paragrafo sia 2/3 slide)ù
+
+
+
+<PARAGRAFO 1> INTRODUZIONE
+Una slide, massimo 2 di introduzione su cosa è il bluetooth ecc
+(eventualemente- ma ho seri dubbi sul farlo o meno- una piccola slide con la cronologia e la storia del bluetooth)
+
+L'introduzione fatta da te in CommentoIntroduzione.txt mi sembra ottima.
+(sia la parte discorsiva sia l'elenco di COSA PUOI FARE)
+
+
+<PARAGRAFO 2> PREREQUISITI (boh, eventualmente cambia questo nome)
+Le nozioni e chiacchiere varie le lasciamo al paragrafo 1 mentre il codice java lo mettiamo dal 3 in poi,
+quindi alcune chiacchiere su quali permessi bisogna richiedere e come scriverlo nell' androidManifest.
+
+Non ho sperimentato personalmente quel codice, ma Permission.txt dovrebbe contenere tutto quello di cui abbiamo bisogno.
+
+
+
+<PARAGRAFO 3> RICERCA DISPOSITIVI (eventualmente lo si unisce a 4 e 5)
+3.1) La parte discorsiva con le varie chiacchiere su cosa significa "device discovery" e sulla differenza tra PAIRED e CONNECTEDù.
+3.2) Tutta la parte di codice presente in quel file dovrebbe essere sufficiente.
+
+FindDevice.txt
+
+<PARAGRAFO 4> CONNESSIONE: come aprirla e come chiuderla
+Anche qui ce la caviamo con poche slide, mostriamo un piccolo esempio del codice della MAIN APP*, 
+spieghiamo qualche accortezza e le varie cose di cui tenere conto e le varie motivazioni per cui una connessione non si apre o chiude correttamente
+
+Connection.txt dovrebbe essere esaustivo a sufficienza
+in aggiunta anche Setup.txt
+
+<PARAGRAFO 5> SCAMBIO DI FILE
+Minicodice di esempio, sempre dalla MAIN APP*.
+Anche qui Connection.txt
+
+<NB> eventualmente 4e5 potrebbero essere uniti in un unico macroparagrafo dove presentiamo più di una versione del codice
+ogni volta con più dettagli.
+Ad esempio:
+versione 1: solo apertura e chiusura
+versione 2: scambio di un piccolo file (ad esempio una stringa di testo o una piccola .bmp)
+versione 3: scambio multiplo di file
+
+<PARAGRAFO 6> NonSoComeChiamarlo (eventualmente lo dividiamo in 2 sottoparagrafi)
+Dopo le info generiche dei precedenti paragrafi passiamo a qualcosa di un minimo più specifico
+6.1 il concetto dei profili e come utilizzarli (alleghiamo un mini-mini-codice su delle cuffie o una cassa audio ad esempio)
+vedi Profiles.txt
+
+6.2 stesso discorso di 6.1, anche se qui potremmo soltanto parlarne teoricamente se non dovessimo riuscire ad un aggiungerci un mini-mini-codice come esempio.
+vedi Health.txt
+
+
+<PARAGRAFO 7> EXTRA: BLE
+Come già detto più volte non lo ritengo un argomento fondamentale, ma nemmeno sufficientemente marginale da ignorarlo. 
+in questo caso tutta la documentazione si trova sul txt apposito.
+Quindi si tratta di 
+-un esempietto di codice da produrre e commentare (e nella slide metteremo screen del codice stesso).
+-In particolare vorrei aggiungere una frasetta o due su cosa lo differenzi dal normale trasferimento bluetooth, 
+e su quale tipo di dispositivo può usarlo e chi no.
+
+
+ 
+
+<PARAGRAFO 8> EXTRA: RFC 
+non sono completamente sicuro se aggiungerlo valga la pena, sinceramente dal poco che ho letto sul txt allegato non ho ben capito esattamente 
+a cosa serva.
+Da quello che dici sembrerebbe sia il protocollo alla base del bluetooth.
+Se così fosse non penso sia una buona idea parlarne troppo (magari qualche cenno, ma non di più), sarebbe come divagare su come funziona il compilatore del C in una lezione sugli array o sulla malloc...
+Più che altro bisognerebbe trovare un buon motivo sul perchè lo stiamo raccontando e capire cosa uno studente che vuole programmare un app con il bluetooth se ne fa con queste info ulteriori.
+
+
+
+
